@@ -5,29 +5,43 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #2b2b2b;
     color: #fff;
 }
 
-.idPropio {
-    background-color: #226848;
-    font-weight: bold;
-}
-
-.mensajePrivado {
-    background-color: #3a3a3a;
-    border-left: 4px solid #ffa500;
-    padding-left: 10px;
-}
-
 #container {
-    width: 80%;
+    width: 90%;
+    /* Se ajustó el ancho */
     max-width: 800px;
     background: #333;
     color: #fff;
     padding: 20px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    /* Se agregó bordes redondeados */
+    margin: 10px;
+    /* Se agregó margen */
+}
+
+/* Agregado para hacer la lista de usuarios conectados y mensajes más responsiva */
+#usuariosConectados,
+#messages {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Se ajustaron estilos para hacerlos más responsivos */
+#usuariosConectados,
+#messages,
+#form input,
+#form button {
+    box-sizing: border-box;
+}
+
+.idPropio {
+    background-color: #226848;
+    font-weight: bold;
 }
 
 #usuariosConectados {
@@ -50,7 +64,8 @@ body {
 #messages {
     list-style: none;
     padding: 0;
-    height: 200px;
+    max-height: 200px;
+    /* Se agregó altura máxima */
     overflow-y: auto;
     background-color: #464646;
     margin-bottom: 20px;
@@ -60,7 +75,6 @@ body {
 #messages li {
     padding: 10px;
     border-bottom: 1px solid #555;
-    /* Borde oscuro */
 }
 
 #messages li:last-child {
@@ -69,15 +83,17 @@ body {
 
 #form {
     display: flex;
+    flex-wrap: wrap;
+    /* Se agregó envoltura de flexbox para dispositivos pequeños */
 }
 
 #form input {
     padding: 10px;
     flex: 1;
-    margin-right: 10px;
+    margin-bottom: 10px;
+    /* Se agregó margen inferior */
     border-radius: 4px;
     border: 1px solid #555;
-    /* Borde oscuro */
     background-color: #333;
     color: #fff;
 }
