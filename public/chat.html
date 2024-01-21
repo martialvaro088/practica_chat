@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="css/oscuro.css">
+</head>
+
+<body>
+    <div id="container">
+        <div class="cabecera">Usuarios Conectados</div>
+        <ul id="usuariosConectados"></ul>
+        <div id="chat" class="cabecera">Zona de Chat</div>
+        <ul id="messages"></ul>
+        <form id="form">
+            <input id="input" autocomplete="off" placeholder="Escribe un mensaje..." />
+            <input id="destinatario" placeholder="ID del destinatario (opcional)" />
+            <button>Enviar</button>
+        </form>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(function () {
+            var socket = io();
+
+            $('form').submit(function (e) {
+                event.preventDefault();
+                var input = $('#input').val();
+                var $textArea = $('#messages');
+                if (!(input.trim() === '')) {
+                    e.preventDefault();
+                    var message = $('#input').val();
+                    var destinatario = $('#destinatario').val();
+
+                    if (destinatario) {
+                        socket.emit('private message', { msg: message, to: destinatario });
+                        $textArea.scrollTop($textArea[0].scrollHeight);
+                    } else {
+                        socket.emit('chat message', message);
+                        $textArea.scrollTop($textArea[0].scrollHeight);
+                    }
+
+                    $('#input').val('');
+                    return false;
+                } else {
+                    $textArea.scrollTop($textArea[0].scrollHeight);
+                }
+            });
+
+            socket.on('chat message', function (data) {
+                var li = $('<li>').text(data.from + ' dice: ' + data.msg);
+                $('#messages').append(li);
+            });
+
+
+            socket.on('private message', function (data) {
+                if (data.to === socket.id || data.from === socket.id) {
+                    var li = $('<li>').text(data.from + ' (privado) dice: ' + data.msg).addClass('mensajePrivado');
+                    $('#messages').append(li);
+                }
+            });
+
+            socket.on('usuarios conectados', function (usuarios) {
+                $('#usuariosConectados').empty();
+                usuarios.forEach(function (id) {
+                    var li = $('<li>').text(id);
+                    if (id === socket.id) { 
+                        li.addClass('idPropio');
+                    }
+                    $('#usuariosConectados').append(li);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

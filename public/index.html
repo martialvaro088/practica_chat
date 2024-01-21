@@ -4,20 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <title>Login chat</title>
     <script src="scripts/scripts.js"></script>
+    <link rel="stylesheet" href="css/login.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <body>
-    <h1>My App</h1>
-    <div id="chat"></div>
-    <br>
-    <form onsubmit="return addMessage(this)">
-        <input type="text" id="username" placeholder="Tu nombre">
-        <input type="text" id="texto" placeholder="Cuentanos algo">
-        <input type="submit" value="Enviar">
+
+    <form>
+        <span>
+            Login
+        </span>
+        <div>
+            <input id="usuario" type="text" name="email" placeholder="Usuario">
+        </div>
+        <div>
+            <input id="clave" type="password" name="pass" placeholder="Contraseña">
+        </div>
+        <div>
+
+
+
     </form>
+    <button type="button" onclick="iniciarSesion()">
+        Iniciar Sesion
+    </button>
+    <p></p>
+    <p></p>
+    <button type="button" onclick="irARegister()">
+        Registrarse
+    </button>
+    
 </body>
 
 </html>
