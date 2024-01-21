@@ -44,6 +44,10 @@ body {
     font-weight: bold;
 }
 
+.mensajePrivado{
+    background-color: #ad6704;
+}
+
 #usuariosConectados {
     list-style: none;
     padding: 0;
